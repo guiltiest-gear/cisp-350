@@ -10,7 +10,7 @@ SELECT
 FROM
   ap_invoices
 WHERE
-  invoice_total >= 5000;
+  (invoice_total - payment_total >= 5000);
 
 DBMS_OUTPUT.PUT_LINE(invoice_count || ' invoices exceed $5,000.');
 
