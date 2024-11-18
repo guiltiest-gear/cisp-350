@@ -9,7 +9,8 @@ cursor, for loops, and if statements.
 DECLARE CURSOR invoices_cursor IS
 SELECT
   invoice_id,
-  invoice_total
+  invoice_total,
+  payment_total
 FROM
   ap_invoices;
 
@@ -18,7 +19,7 @@ invoice_row ap_invoices % ROWTYPE;
 invoice_counter NUMBER := 0;
 
 BEGIN FOR invoice_row IN invoices_cursor
-LOOP IF (invoice_row.invoice_total >= 5000) THEN invoice_counter := invoice_counter + 1;
+LOOP IF (invoice_row.invoice_total - invoice_row.payment_total >= 5000) THEN invoice_counter := invoice_counter + 1;
 
 END IF;
 
